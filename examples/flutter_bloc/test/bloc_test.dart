@@ -69,14 +69,14 @@ void main() {
     });
 
     test('initial state is loading', () {
-      expect(repoBloc.initialState, ReposLoading());
+      expect(repoBloc.state, ReposLoading());
     });
 
     group('Fetch Repositories', () {
       test('fetch repositories', () {
         final results = QueryResult(
           data: decodeGithubResponse['data'],
-          errors: null,
+          exception: null,
           loading: false,
         );
 
@@ -96,7 +96,7 @@ void main() {
           emitsInOrder(expected),
         );
 
-        repoBloc.dispatch(LoadMyRepos(numOfReposToLoad: numOfRepos));
+        repoBloc.add(LoadMyRepos(numOfReposToLoad: numOfRepos));
       });
     });
   });
