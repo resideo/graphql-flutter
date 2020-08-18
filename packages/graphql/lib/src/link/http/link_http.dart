@@ -35,7 +35,9 @@ class HttpLink extends Link {
             Operation operation, [
             NextLink forward,
           ]) {
-            final parsedUri = Uri.parse(uri);
+            final persistedQuery = operation.getContext()['persistedQuery'] as String;
+            String finalUri = (persistedQuery != null) ? '$uri/$persistedQuery' : uri;
+            final parsedUri = Uri.parse(finalUri);
 
             if (operation.isSubscription) {
               if (forward == null) {
